@@ -62,7 +62,7 @@ def create_working_directory(cfg):
 def detect_variables(cfg_file):
     with open(cfg_file, "r") as fin:
         raw = fin.read()
-    env = jinja2.Environment()
+    env = jinja2.Environment(autoescape=True)
     ast = env.parse(raw)
     vars = meta.find_undeclared_variables(ast)
     return vars
