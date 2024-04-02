@@ -99,11 +99,11 @@ def build_solver(cfg, dataset):
     train_set, valid_set, test_set = dataset.split()
     if comm.get_rank() == 0:
         logger.warning(dataset)
-        logger.warning("#train: %d, #valid: %d, #test: %d" % (len(train_set), len(valid_set), len(test_set)))
+        logger.warning("#train: %d, #valid: %d, #test: %d", len(train_set), len(valid_set), len(test_set))
 
     if "fast_test" in cfg:
         if comm.get_rank() == 0:
-            logger.warning("Quick test mode on. Only evaluate on %d samples for valid / test." % cfg.fast_test)
+            logger.warning("Quick test mode on. Only evaluate on %d samples for valid / test.", cfg.fast_test)
         g = torch.Generator()
         g.manual_seed(1024)
         valid_set = torch_data.random_split(valid_set, [cfg.fast_test, len(valid_set) - cfg.fast_test], generator=g)[0]
